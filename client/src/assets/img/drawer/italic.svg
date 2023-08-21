@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_2733" data-name="Group 2733" transform="translate(-13468 -392)">
+    <g id="Group_2722" data-name="Group 2722" transform="translate(13464.149 396.501)">
+      <path id="Path_2019" data-name="Path 2019" d="M229.5,23.361a.958.958,0,0,1-.958.958h-3.171l-4.314,9.249a.957.957,0,1,1-1.735-.809l3.934-8.439h-3.237a.958.958,0,1,1,0-1.915h8.522a.958.958,0,0,1,.958.958Z" transform="translate(-207.088 -22.403)"/>
+      <path id="Path_2020" data-name="Path 2020" d="M104.011,472.311H96.876a.958.958,0,1,1,0-1.915h7.135a.958.958,0,1,1,0,1.915Z" transform="translate(-87.45 -457.628)"/>
+      <path id="Path_2021" data-name="Path 2021" d="M456.758,388.94a.957.957,0,1,1-1.353,1.353l-.522-.522-.522.522a.958.958,0,1,1-1.355-1.353l.522-.522-.522-.522a.958.958,0,1,1,1.355-1.355l.522.522.522-.522a.958.958,0,0,1,1.353,1.355l-.522.522Z" transform="translate(-434.09 -375.891)"/>
+    </g>
+    <rect id="Rectangle_899" data-name="Rectangle 899" width="24" height="24" transform="translate(13468 392)" fill="none"/>
+  </g>
+</svg>

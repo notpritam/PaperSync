@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_2754" data-name="Group 2754" transform="translate(-741 -108)">
+    <g id="Group_2723" data-name="Group 2723" transform="translate(743.161 113.35)">
+      <path id="Path_2062" data-name="Path 2062" d="M194.531,308h16a1.422,1.422,0,0,1,1.155.534.888.888,0,0,1,0,1.068,1.422,1.422,0,0,1-1.155.534h-16a1.422,1.422,0,0,1-1.155-.534.888.888,0,0,1,0-1.068A1.422,1.422,0,0,1,194.531,308Z" transform="translate(-193.198 -302.418)"/>
+      <path id="Path_2192" data-name="Path 2192" d="M194.338,308h13.681a1.157,1.157,0,0,1,.987.534,1.01,1.01,0,0,1,0,1.068,1.157,1.157,0,0,1-.987.534H194.338a1.157,1.157,0,0,1-.987-.534,1.01,1.01,0,0,1,0-1.068A1.157,1.157,0,0,1,194.338,308Z" transform="translate(-193.198 -297.03)"/>
+      <path id="Path_2063" data-name="Path 2063" d="M194.266,408.8h6.941a1.068,1.068,0,0,1,0,2.136h-6.941a1.068,1.068,0,1,1,0-2.136Z" transform="translate(-193.198 -408.605)"/>
+    </g>
+    <rect id="Rectangle_906" data-name="Rectangle 906" width="24" height="24" transform="translate(741 108)" fill="none" opacity="0.7"/>
+  </g>
+</svg>

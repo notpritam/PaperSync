@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,body{
+    box-sizing: border-box;
+    color: #414549;
+    padding: 0;
+    margin: 0;
+}
+
+.ql-toolbar.ql-snow{
+    
+    background-color: #edf2fa;
+    border: none;
+    display: flex;
+    align-items: center;
+   
+    min-height: 40px;
+    padding: 0 8px;
+    -webkit-font-smoothing: antialiased;
+}
