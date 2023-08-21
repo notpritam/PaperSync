@@ -8,7 +8,7 @@ function DocumentCard({ id, name, image, date, type }) {
     <a href="/doc">
       <div className="flex flex-col gap-2 p-2 m-2 border-[1px] hover:border-blue-400 rounded-sm   duration-150 transition-all ease-in-out">
         <div className="overflow-hidden rounded-sm border-b-[1px]">
-          <img src={image}></img>
+          <img className="z-[1]" src={image}></img>
         </div>
         <div className="flex flex-col gap-[2px] p-2 pt-1">
           <span className="text-[14px]  text-ellipsis line-clamp-1">
