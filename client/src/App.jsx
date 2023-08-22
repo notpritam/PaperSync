@@ -19,7 +19,7 @@ import LoginPage from "./pages/auth/LoginPage";
 import Register from "./pages/auth/Register";
 
 function App() {
-  const user = useUser((state) => state.user);
+  const user = useUser((state) => state?.user);
   console.log(user, "this is user");
 
   return (
@@ -30,7 +30,7 @@ function App() {
             path="/"
             exact
             index
-            element={!user ? <LoginPage /> : <Navigate to="/login" />}
+            element={!user._id ? <Navigate to="/login" /> : <HomePage />}
           ></Route>
           <Route exact path="/doc" element={<DocsPage />}></Route>
           <Route exact index path="/login" element={<LoginPage />}></Route>

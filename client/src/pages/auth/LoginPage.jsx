@@ -7,7 +7,7 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const setUser = useUser((state) => state.setUser);
+  const logIn = useUser((state) => state.logIn);
 
   const checkUser = async () => {
     axios
@@ -25,7 +25,9 @@ function LoginPage() {
         }
       )
       .then((response) => {
-        setUser(response.data);
+        logIn({
+          user: response.data,
+        });
       })
       .catch(function (error) {
         console.log(error);
