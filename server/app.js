@@ -4,6 +4,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
+const User = require("./models/user");
+const auth = require("./middleware/auth");
 
 const jwt = require("jsonwebtoken");
 
@@ -12,8 +14,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-const User = require("./models/user");
 
 app.post("/api/register", async (req, res) => {
   // Our register logic starts here
@@ -89,6 +89,10 @@ app.post("/api/login", async (req, res) => {
     console.log(err);
   }
   // Our register logic ends here
+});
+
+app.get("/api/", auth, (req, res) => {
+  res.status(200).send("Working");
 });
 
 module.exports = app;
