@@ -44,7 +44,7 @@ function LoginPage() {
         <div className="flex flex-col justify-center items-center gap-2">
           <img
             className="h-12 w-12"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            src="https://www.gstatic.com/images/branding/product/1x/docs_2020q4_48dp.png"
           ></img>
           <h1 class=" text-center text-2xl mb-5">Docs</h1>
         </div>
