@@ -1,9 +1,20 @@
 const mongoose = require("mongoose");
-mongoose.connect(
-  "mongodb+srv://notpritam:dYS5UhfM6qDtgs22@cluster0.jvfph8p.mongodb.net/?retryWrites=true&w=majority"
-);
 
-const Cat = mongoose.model("Cat", { name: String });
+const { MONGODB_URL } = process.env;
 
-const kitty = new Cat({ name: "Zildjian" });
-kitty.save().then(() => console.log("meow"));
+exports.connect = () => {
+  // Connecting to the database
+  mongoose
+    .connect(MONGODB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      console.log("Successfully connected to database");
+    })
+    .catch((error) => {
+      console.log("database connection failed. exiting now...");
+      console.error(error);
+      process.exit(1);
+    });
+};
