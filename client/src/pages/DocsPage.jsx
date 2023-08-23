@@ -76,9 +76,8 @@ function DocsPage() {
 
     const interval = setInterval(() => {
       const textData = quillRef?.current.getEditor().getContents();
-      socket.emit("save-document", textData);
 
-      // const typp = typeof textData;
+      socket.emit("save-document", textData);
       console.log(textData);
     }, 3000);
   }, [socket]);
@@ -93,13 +92,7 @@ function DocsPage() {
             </div>
             <div className="flex flex-col gap-[4px] ">
               <div className="flex ">
-                <input
-                  ref={titleRef}
-                  value={title}
-                  // onChange={(e) => setTitle(e.target.value)}
-                  className=""
-                  placeholder="Resume"
-                ></input>
+                <input value={title} className="" placeholder="Resume"></input>
                 <div className="flex gap-2">
                   <StarBorderOutlinedIcon />
                   <DriveFileMoveOutlinedIcon />
@@ -152,9 +145,6 @@ function DocsPage() {
                 theme="snow"
                 defaultValue={editorValue}
                 value={editorValue}
-                // onChangeSelection={(e) => {
-                //   changeEditorStatus(e);
-                // }}
                 paste
                 onChange={onEditorChange}
                 placeholder={"Write something awesome..."}
