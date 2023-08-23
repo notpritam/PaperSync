@@ -29,6 +29,7 @@ io.on("connection", (socket) => {
     const document = await findDocumet(id);
 
     socket.join(id);
+    console.log(document, "this is documennt");
 
     socket.emit("load-document", document);
     socket.on("send-changes", (delta) => {

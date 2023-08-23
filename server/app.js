@@ -119,4 +119,13 @@ app.get("/api/authenticate", auth, (req, res) => {
   res.status(200).send("Authenticated Successfully");
 });
 
+app.post("/api/getDocs", auth, async (req, res) => {
+  const { userId } = req.body;
+
+  console.log("getting docs", userId);
+
+  const docs = await User.findById(userId).populate("documents").exec();
+  res.status(200).send(docs.documents);
+});
+
 module.exports = app;

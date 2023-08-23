@@ -44,10 +44,13 @@ function DocsPage() {
     if (socket == null) return;
 
     socket.once("load-document", (document) => {
-      console.log(document, "this is document");
-      setTitle(document.title);
-      quillRef.current.getEditor().setContents(document.textData);
-      quillRef.current.getEditor().enable();
+      const textData = document.textData;
+      console.log(textData, "this is document");
+
+      // const titleOnline = document.title;
+      // setTitle(titleOnline);
+      quillRef?.current.getEditor().setContents(textData);
+      quillRef?.current.getEditor().enable();
     });
 
     socket.emit("get-document", id);
@@ -93,6 +96,7 @@ function DocsPage() {
                 <input
                   ref={titleRef}
                   value={title}
+                  // onChange={(e) => setTitle(e.target.value)}
                   className=""
                   placeholder="Resume"
                 ></input>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import UnfoldMoreRoundedIcon from "@mui/icons-material/UnfoldMoreRounded";
 import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
 import TemplateCard from "../components/shared/TemplateCard";
@@ -8,8 +8,74 @@ import FolderOpenRoundedIcon from "@mui/icons-material/FolderOpenRounded";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import DocumentCard from "../components/shared/DocumentCard";
 import Header from "../components/shared/Header";
+import useUser from "../util/store";
+import axios from "axios";
 
 function HomePage() {
+  const user = useUser((state) => state.user);
+  const token = useUser((state) => state.token);
+  const userId = user._id;
+
+  const [docs, setDocs] = useState([]);
+
+  useEffect(() => {
+    getDocs();
+  }, []);
+  const getDocs = () => {
+    axios
+      .post(
+        "http://localhost:3001/api/getDocs",
+        {
+          userId: userId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token,
+          },
+        }
+      )
+      .then((response) => {
+        const data = response.data;
+
+        setDocs(data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const period = hours >= 12 ? "PM" : "AM";
+
+    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+    const day = date.getDate();
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const month = monthNames[date.getMonth()];
+
+    const formattedDate = `${formattedHours}:${formattedMinutes}${period} ${day} ${month}`;
+
+    return formattedDate;
+  }
   return (
     <>
       <main className="w-screen h-screen overflow-hidden pb-12 ">
@@ -131,98 +197,17 @@ function HomePage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-5">
-                <DocumentCard
-                  id=""
-                  name="Resume"
-                  image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
-                  date="20 Aug 2023"
-                  type="owner"
-                />
-                <DocumentCard
-                  id=""
-                  name="The Way of Living"
-                  image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
-                  date="20 Aug 2023"
-                  type="owner"
-                />
-                <DocumentCard
-                  id=""
-                  name="Discrete Math Part 1"
-                  image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
-                  date="20 Aug 2023"
-                  type="owner"
-                />
-                <DocumentCard
-                  id=""
-                  name="Self Awarness is Coming"
-                  image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
-                  date="20 Aug 2023"
-                  type="owner"
-                />
-                <DocumentCard
-                  id=""
-                  name="This is the way"
-                  image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
-                  date="20 Aug 2023"
-                  type="shared"
-                />
-                <DocumentCard
-                  id=""
-                  name="Avengers Assemble"
-                  image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
-                  date="20 Aug 2023"
-                  type="owner"
-                />
-                <DocumentCard
-                  id=""
-                  name="Resume"
-                  image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
-                  date="20 Aug 2023"
-                  type="shared"
-                />
-                <DocumentCard
-                  id=""
-                  name="Resume"
-                  image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
-                  date="20 Aug 2023"
-                  type="owner"
-                />
-                <DocumentCard
-                  id=""
-                  name="Resume"
-                  image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
-                  date="20 Aug 2023"
-                  type="owner"
-                />
-                <DocumentCard
-                  id=""
-                  name="Resume"
-                  image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
-                  date="20 Aug 2023"
-                  type="owner"
-                />
-                <DocumentCard
-                  id=""
-                  name="Resume"
-                  image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
-                  date="20 Aug 2023"
-                  type="owner"
-                />
-                <DocumentCard
-                  id=""
-                  name="Resume"
-                  image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
-                  date="20 Aug 2023"
-                  type="owner"
-                />
-                <DocumentCard
-                  id=""
-                  name="Resume"
-                  image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
-                  date="20 Aug 2023"
-                  type="owner"
-                />
+              <div className="grid grid-cols-5 ">
+                {docs?.map((document, index) => (
+                  <DocumentCard
+                    key={document._id}
+                    id={document._id}
+                    name={document.title}
+                    image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
+                    date={formatDate(document.updatedAt)}
+                    type="owner"
+                  />
+                ))}
               </div>
             </div>
           </div>
