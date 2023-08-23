@@ -16,8 +16,6 @@ function DocsPage() {
   const [editorValue, setEditorValue] = useState("");
   const [editorToolOpen, setEditorToolOpen] = useState(true);
   const quillRef = useRef();
-  const [title, setTitle] = useState("");
-
   const [socket, setSocket] = useState();
 
   const { id } = useParams();
@@ -93,7 +91,6 @@ function DocsPage() {
               <div className="flex gap-4 text-[14px]">
                 <button>File</button>
                 <button>Edit</button>
-
                 <button>View</button>
                 <button>Insert</button>
                 <button>Format</button>
@@ -141,8 +138,6 @@ function DocsPage() {
                 placeholder={"Write something awesome..."}
                 modules={modules}
                 formats={formats}
-                // disable={true}
-
                 readOnly
               />
             </div>
