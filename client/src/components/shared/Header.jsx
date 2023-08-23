@@ -2,8 +2,14 @@ import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AppsRoundedIcon from "@mui/icons-material/AppsRounded";
+import useUser from "../../util/store";
 
 function Header() {
+  const logOut = useUser((state) => state.logOut);
+
+  const logoutUser = () => {
+    logOut();
+  };
   return (
     <>
       <div className="bg-white z-[999] p-2 pl-4 pr-4 flex justify-between items-center shadow-md">
@@ -32,7 +38,10 @@ function Header() {
             <AppsRoundedIcon />
           </button>
 
-          <div className="h-[32px] w-[32px] rounded-full overflow-hidden hover:border-[4px] border-blue-400 transition-all duration-200 ease-in bg-red-600">
+          <div
+            onClick={logoutUser}
+            className="h-[32px] w-[32px] rounded-full overflow-hidden hover:border-[4px] border-blue-400 transition-all duration-200 ease-in bg-red-600"
+          >
             <img src="https://lh3.googleusercontent.com/ogw/AGvuzYZkyx6XMc-0HQ-D27nOrtcvLPws9VF6MyfXxj3-zA=s32-c-mo"></img>
           </div>
         </div>

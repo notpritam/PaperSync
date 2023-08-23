@@ -1,21 +1,29 @@
+import axios from "axios";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 const user = (set) => ({
   user: {},
   token: null,
-  setUser: (params) => {
-    const { user } = params;
+  authenticate: async () => {
+    set((state) => {});
+  },
+  setToken: (params) => {
+    const { token } = params;
 
     set((state) => {
-      user: user;
+      return {
+        token: token,
+      };
     });
   },
 
   logOut: (params) => {
     set((state) => {
-      user: null;
-      token: null;
+      return {
+        user: null,
+        token: null,
+      };
     });
   },
 

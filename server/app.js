@@ -106,4 +106,8 @@ app.get("/api/new", auth, async (req, res) => {
     doc: doc,
   });
 });
+
+app.get("/api/authenticate", auth, (req, res) => {
+  res.status(200).send("Authenticated Successfully");
+});
 module.exports = app;

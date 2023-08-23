@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -17,10 +17,35 @@ import DocsPage from "./pages/DocsPage";
 import useUser from "./util/store";
 import LoginPage from "./pages/auth/LoginPage";
 import Register from "./pages/auth/Register";
+import axios from "axios";
 
 function App() {
-  const user = useUser((state) => state?.user);
-  console.log(user, "this is user");
+  const token = useUser((state) => state?.token);
+  console.log(token, "this is user");
+
+  const setToken = useUser((state) => state?.setToken);
+
+  const authenticate = async () => {
+    axios
+      .get("http://localhost:3001/api/authenticate", {
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": token,
+        },
+      })
+      .then((response) => {
+        console.log("Authenticated");
+      })
+      .catch(function (error) {
+        setToken({ token: null });
+      });
+  };
+
+  useEffect(() => {
+    if (token) {
+      authenticate();
+    }
+  }, [token]);
 
   return (
     <>
@@ -30,13 +55,13 @@ function App() {
             path="/"
             exact
             index
-            element={!user._id ? <Navigate to="/login" /> : <HomePage />}
+            element={!token ? <Navigate to="/login" /> : <HomePage />}
           ></Route>
           <Route exact index path="/login" element={<LoginPage />}></Route>
           <Route exact path="/register" element={<Register />}></Route>
           <Route
             path="/documents/:id"
-            element={!user._id ? <Navigate to="/login" /> : <DocsPage />}
+            element={!token ? <Navigate to="/login" /> : <DocsPage />}
           />
         </Routes>
       </BrowserRouter>
