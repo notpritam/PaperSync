@@ -37,8 +37,8 @@ io.on("connection", (socket) => {
       socket.broadcast.to(id).emit("receive-changes", delta);
     });
 
-    socket.on("save-document", async ({ textData, title }) => {
-      const save = await Docs.findByIdAndUpdate(id, { textData, title });
+    socket.on("save-document", async (textData) => {
+      const save = await Docs.findByIdAndUpdate(id, { textData });
 
       console.log(save);
     });

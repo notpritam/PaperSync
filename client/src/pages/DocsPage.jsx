@@ -33,7 +33,7 @@ function DocsPage() {
     };
   }, []);
 
-  const onChange = (content, delta, source, editor) => {
+  const onEditorChange = (content, delta, source, editor) => {
     if (source !== "user") return;
     socket.emit("send-changes", delta);
   };
@@ -73,7 +73,7 @@ function DocsPage() {
 
     const interval = setInterval(() => {
       const textData = quillRef?.current.getEditor().getContents();
-      socket.emit("save-document", { textData, title });
+      socket.emit("save-document", textData);
 
       // const typp = typeof textData;
       console.log(textData);
@@ -93,7 +93,6 @@ function DocsPage() {
                 <input
                   ref={titleRef}
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
                   className=""
                   placeholder="Resume"
                 ></input>
@@ -153,7 +152,7 @@ function DocsPage() {
                 //   changeEditorStatus(e);
                 // }}
                 paste
-                onChange={onChange}
+                onChange={onEditorChange}
                 placeholder={"Write something awesome..."}
                 modules={modules}
                 formats={formats}
