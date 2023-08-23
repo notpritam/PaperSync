@@ -9,6 +9,7 @@ import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import EditorToolbar, { formats, modules } from "../components/editor/toolbar";
+import { useParams } from "react-router-dom";
 
 function DocsPage() {
   const [editorValue, setEditorValue] = useState("");
@@ -17,7 +18,8 @@ function DocsPage() {
   const quillRef = useRef();
   const editorRef = useRef();
   const toolbarRef = useRef();
-  useEffect(() => {}, []);
+
+  const { id } = useParams();
   return (
     <>
       <main className="w-screen h-screen overflow-hidden">

@@ -32,9 +32,12 @@ function App() {
             index
             element={!user._id ? <Navigate to="/login" /> : <HomePage />}
           ></Route>
-          <Route exact path="/doc" element={<DocsPage />}></Route>
           <Route exact index path="/login" element={<LoginPage />}></Route>
           <Route exact path="/register" element={<Register />}></Route>
+          <Route
+            path="/documents/:id"
+            element={!user._id ? <Navigate to="/login" /> : <DocsPage />}
+          />
         </Routes>
       </BrowserRouter>
     </>

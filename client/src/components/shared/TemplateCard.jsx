@@ -1,8 +1,43 @@
 import React from "react";
+import axios from "axios";
+import useUser from "../../util/store";
+import { redirect, useNavigate } from "react-router-dom";
 
 function TemplateCard({ id, name, image, type }) {
+  const token = useUser((state) => state.token);
+
+  // const history = useHistory();
+  const navigate = useNavigate();
+
+  const createNew = async () => {
+    console.log("getting here");
+    try {
+      axios
+        .get("http://localhost:3001/api/new", {
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token,
+          },
+        })
+        .then((response) => {
+          const doc = response.data.doc;
+
+          const id = doc._id;
+
+          navigate(`/documents/` + id);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
-    <div className="flex flex-col gap-2 m-4">
+    <div
+      onClick={() => createNew()}
+      className="flex cursor-pointer flex-col gap-2 m-4"
+    >
       <div className="overflow-hidden rounded-sm hover:border-blue-400   border-[1px] duration-150 transition-all ease-in-out">
         <img className="z-[1]" src={image}></img>
       </div>

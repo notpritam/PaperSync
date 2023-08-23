@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const User = require("./models/user");
+const Docs = require("./models/docs");
 const auth = require("./middleware/auth");
 
 const jwt = require("jsonwebtoken");
@@ -97,4 +98,12 @@ app.get("/api/", auth, (req, res) => {
   res.status(200).send("Working");
 });
 
+app.get("/api/new", auth, async (req, res) => {
+  console.log("getting here");
+  const doc = await Docs.create({});
+  res.status(201).send({
+    msg: "Docs created Successfully",
+    doc: doc,
+  });
+});
 module.exports = app;
