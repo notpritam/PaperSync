@@ -14,10 +14,8 @@ import { io } from "socket.io-client";
 
 function DocsPage() {
   const [editorValue, setEditorValue] = useState("");
-  const [editor, setEditor] = useState("myeditor disable");
   const [editorToolOpen, setEditorToolOpen] = useState(true);
   const quillRef = useRef();
-  const titleRef = useRef();
   const [title, setTitle] = useState("");
 
   const [socket, setSocket] = useState();
@@ -38,17 +36,11 @@ function DocsPage() {
     socket.emit("send-changes", delta);
   };
 
-  //Creating Single Connection with Id
-
   useEffect(() => {
     if (socket == null) return;
 
     socket.once("load-document", (document) => {
       const textData = document.textData;
-      console.log(textData, "this is document");
-
-      // const titleOnline = document.title;
-      // setTitle(titleOnline);
       quillRef?.current.getEditor().setContents(textData);
       quillRef?.current.getEditor().enable();
     });
@@ -57,11 +49,10 @@ function DocsPage() {
   }, [socket, id]);
 
   useEffect(() => {
-    if (!socket) return; // Check if socket is defined before proceeding
+    if (!socket) return;
 
     const handler = (delta) => {
       const newContent = quillRef.current.getEditor().updateContents(delta);
-      // setEditorValue(newContent);
     };
 
     socket.on("receive-changes", handler);
@@ -92,7 +83,7 @@ function DocsPage() {
             </div>
             <div className="flex flex-col gap-[4px] ">
               <div className="flex ">
-                <input value={title} className="" placeholder="Resume"></input>
+                <input className="" placeholder="Doc Title Here"></input>
                 <div className="flex gap-2">
                   <StarBorderOutlinedIcon />
                   <DriveFileMoveOutlinedIcon />
