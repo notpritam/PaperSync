@@ -40,7 +40,7 @@ function Register() {
             className="h-12 w-12"
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
           ></img>
-          <h1 className=" text-center text-2xl mb-5">Docs Register</h1>
+          <h1 className=" text-center text-2xl mb-5">Docs Registration</h1>
         </div>
         <div className="bg-white shadow-md w-full rounded-lg divide-y divide-gray-200">
           <div className="px-5 py-7">
