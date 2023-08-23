@@ -28,8 +28,12 @@ function LoginPage() {
         }
       )
       .then((response) => {
+        console.log(response.data);
+
+        const user = response.data;
+
         logIn({
-          user: response.data,
+          user: user,
         });
 
         navigate("/");

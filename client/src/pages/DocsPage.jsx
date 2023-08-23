@@ -17,8 +17,8 @@ function DocsPage() {
   const [editor, setEditor] = useState("myeditor disable");
   const [editorToolOpen, setEditorToolOpen] = useState(true);
   const quillRef = useRef();
-  const editorRef = useRef();
-  const toolbarRef = useRef();
+  const titleRef = useRef();
+  const [title, setTitle] = useState("");
 
   const [socket, setSocket] = useState();
 
@@ -44,7 +44,9 @@ function DocsPage() {
     if (socket == null) return;
 
     socket.once("load-document", (document) => {
-      quillRef.current.getEditor().setContents(document);
+      console.log(document, "this is document");
+      setTitle(document.title);
+      quillRef.current.getEditor().setContents(document.textData);
       quillRef.current.getEditor().enable();
     });
 
@@ -71,7 +73,7 @@ function DocsPage() {
 
     const interval = setInterval(() => {
       const textData = quillRef?.current.getEditor().getContents();
-      socket.emit("save-document", textData);
+      socket.emit("save-document", { textData, title });
 
       // const typp = typeof textData;
       console.log(textData);
@@ -88,7 +90,13 @@ function DocsPage() {
             </div>
             <div className="flex flex-col gap-[4px] ">
               <div className="flex ">
-                <input className="" placeholder="Resume"></input>
+                <input
+                  ref={titleRef}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className=""
+                  placeholder="Resume"
+                ></input>
                 <div className="flex gap-2">
                   <StarBorderOutlinedIcon />
                   <DriveFileMoveOutlinedIcon />

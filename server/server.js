@@ -30,17 +30,17 @@ io.on("connection", (socket) => {
 
     socket.join(id);
 
-    socket.emit("load-document", document.textData);
+    socket.emit("load-document", document);
     socket.on("send-changes", (delta) => {
       // console.log(delta);
 
       socket.broadcast.to(id).emit("receive-changes", delta);
     });
 
-    socket.on("save-document", async (textData) => {
-      const save = await Docs.findByIdAndUpdate(id, { textData });
+    socket.on("save-document", async ({ textData, title }) => {
+      const save = await Docs.findByIdAndUpdate(id, { textData, title });
 
-      console.log(save, textData);
+      console.log(save);
     });
   });
 });

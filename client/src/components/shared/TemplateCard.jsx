@@ -5,8 +5,8 @@ import { redirect, useNavigate } from "react-router-dom";
 
 function TemplateCard({ id, name, image, type }) {
   const token = useUser((state) => state.token);
+  const user = useUser((state) => state.user);
 
-  // const history = useHistory();
   const navigate = useNavigate();
 
   const createNew = async () => {
@@ -16,7 +16,7 @@ function TemplateCard({ id, name, image, type }) {
         .post(
           "http://localhost:3001/api/new",
           {
-            user: email,
+            userId: user._id,
           },
           {
             headers: {

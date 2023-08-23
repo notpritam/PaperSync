@@ -99,9 +99,9 @@ app.get("/api/", auth, (req, res) => {
 });
 
 app.post("/api/new", auth, async (req, res) => {
-  console.log("getting here");
+  const { userId } = req.body;
+  console.log(userId);
 
-  const { userId } = res.body;
   const doc = await Docs.create({ creator: userId });
 
   await User.findByIdAndUpdate(
