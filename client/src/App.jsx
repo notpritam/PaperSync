@@ -34,7 +34,7 @@ function App() {
         },
       })
       .then((response) => {
-        console.log("Authenticated");
+        // console.log("Authenticated");
       })
       .catch(function (error) {
         setToken({ token: null });
