@@ -21,7 +21,6 @@ import axios from "axios";
 
 function App() {
   const token = useUser((state) => state?.token);
-  console.log(token, "this is user");
 
   const setToken = useUser((state) => state?.setToken);
 
@@ -33,9 +32,7 @@ function App() {
           "x-access-token": token,
         },
       })
-      .then((response) => {
-        // console.log("Authenticated");
-      })
+      .then((response) => {})
       .catch(function (error) {
         setToken({ token: null });
       });

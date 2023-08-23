@@ -10,6 +10,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import EditorToolbar, { formats, modules } from "../components/editor/toolbar";
 import { useParams } from "react-router-dom";
+import { io } from "socket.io-client";
 
 function DocsPage() {
   const [editorValue, setEditorValue] = useState("");
@@ -19,7 +20,64 @@ function DocsPage() {
   const editorRef = useRef();
   const toolbarRef = useRef();
 
+  const [socket, setSocket] = useState();
+
   const { id } = useParams();
+
+  useEffect(() => {
+    const s = io("http://localhost:3001");
+    setSocket(s);
+
+    return () => {
+      s.disconnect();
+    };
+  }, []);
+
+  const onChange = (content, delta, source, editor) => {
+    if (source !== "user") return;
+    socket.emit("send-changes", delta);
+  };
+
+  //Creating Single Connection with Id
+
+  useEffect(() => {
+    if (socket == null) return;
+
+    socket.once("load-document", (document) => {
+      quillRef.current.getEditor().setContents(document);
+      quillRef.current.getEditor().enable();
+    });
+
+    socket.emit("get-document", id);
+  }, [socket, id]);
+
+  useEffect(() => {
+    if (!socket) return; // Check if socket is defined before proceeding
+
+    const handler = (delta) => {
+      const newContent = quillRef.current.getEditor().updateContents(delta);
+      // setEditorValue(newContent);
+    };
+
+    socket.on("receive-changes", handler);
+
+    return () => {
+      socket.off("receive-changes", handler);
+    };
+  }, [socket]);
+
+  useEffect(() => {
+    if (socket == null) return;
+
+    const interval = setInterval(() => {
+      const textData = quillRef?.current.getEditor().getContents();
+      socket.emit("save-document", textData);
+
+      // const typp = typeof textData;
+      console.log(textData);
+    }, 3000);
+  }, [socket]);
+
   return (
     <>
       <main className="w-screen h-screen overflow-hidden">
@@ -87,10 +145,13 @@ function DocsPage() {
                 //   changeEditorStatus(e);
                 // }}
                 paste
-                onChange={(e) => handlePostPaste(e)}
+                onChange={onChange}
                 placeholder={"Write something awesome..."}
                 modules={modules}
                 formats={formats}
+                // disable={true}
+
+                readOnly
               />
             </div>
           </div>

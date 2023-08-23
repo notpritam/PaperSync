@@ -8,6 +8,12 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: { type: String },
   token: { type: String },
+  documents: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Docs",
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userSchema);

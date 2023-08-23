@@ -13,12 +13,18 @@ function TemplateCard({ id, name, image, type }) {
     console.log("getting here");
     try {
       axios
-        .get("http://localhost:3001/api/new", {
-          headers: {
-            "Content-Type": "application/json",
-            "x-access-token": token,
+        .post(
+          "http://localhost:3001/api/new",
+          {
+            user: email,
           },
-        })
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "x-access-token": token,
+            },
+          }
+        )
         .then((response) => {
           const doc = response.data.doc;
 
@@ -27,7 +33,9 @@ function TemplateCard({ id, name, image, type }) {
           navigate(`/documents/` + id);
         })
         .catch(function (error) {
-          console.log(error);
+          if (error.response.status == 401) {
+            navigate(`/login`);
+          }
         });
     } catch (err) {
       console.log(err);

@@ -12,10 +12,15 @@ const docSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
+    creator: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     type: {
       type: String,
       default: "Blank",
     },
+    textData: Object,
   },
   { timestamps: true }
 );

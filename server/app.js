@@ -77,7 +77,7 @@ app.post("/api/login", async (req, res) => {
         { user_id: user._id, email },
         process.env.TOKEN_KEY,
         {
-          expiresIn: "20s",
+          expiresIn: "2h",
         }
       );
 
@@ -98,9 +98,17 @@ app.get("/api/", auth, (req, res) => {
   res.status(200).send("Working");
 });
 
-app.get("/api/new", auth, async (req, res) => {
+app.post("/api/new", auth, async (req, res) => {
   console.log("getting here");
-  const doc = await Docs.create({});
+
+  const { userId } = res.body;
+  const doc = await Docs.create({ creator: userId });
+
+  await User.findByIdAndUpdate(
+    userId, // User's ID
+    { $push: { documents: doc._id } }, // Add the new document's ID to the array
+    { new: true } // Return the updated user document after update
+  );
   res.status(201).send({
     msg: "Docs created Successfully",
     doc: doc,
@@ -110,4 +118,5 @@ app.get("/api/new", auth, async (req, res) => {
 app.get("/api/authenticate", auth, (req, res) => {
   res.status(200).send("Authenticated Successfully");
 });
+
 module.exports = app;
