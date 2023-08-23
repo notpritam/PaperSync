@@ -5,7 +5,7 @@ import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 
 function DocumentCard({ id, name, image, date, type }) {
   return (
-    <a href="/doc" className="mb-4">
+    <a href={`/documents/${id}`} className="mb-4">
       <div className="flex justify-between  h-full flex-col gap-2 p-2 m-2 border-[1px] hover:border-blue-400 rounded-sm   duration-150 transition-all ease-in-out">
         <div className="overflow-hidden mt-2 rounded-sm border-b-[1px]">
           <img className="z-[1]" src={image}></img>
