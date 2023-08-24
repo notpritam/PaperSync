@@ -19,20 +19,6 @@ function DocsPage({ title }) {
         <div className="w-full h-full">
           <div className="m-auto flex items-center justify-center h-full border-[1px]  p-2 mt-2">
             <div className="max-w-[1040px] h-full w-full">
-              {/* <ReactQuill
-                className="h-full"
-                ref={quillRef}
-                theme="snow"
-                defaultValue={editorValue}
-                value={editorValue}
-                paste
-                onChange={onEditorChange}
-                placeholder={"Write something awesome..."}
-                modules={modules}
-                formats={formats}
-                readOnly
-              /> */}
-
               <Editor id={id} />
             </div>
           </div>
