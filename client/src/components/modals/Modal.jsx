@@ -13,7 +13,7 @@ const Modal = () => {
         return (
           <div
             // onClick={() => setModal(null)}
-            className="absolute top-0 backdrop-blur-sm  transition-all duration-200 ease-in-out bottom-0  h-screen w-screen flex m-auto justify-center items-center"
+            className="absolute top-0 backdrop-blur-sm  bg-opacity-20 bg-black transition-all duration-200 ease-in-out bottom-0  h-screen w-screen flex m-auto justify-center items-center"
           >
             {/* <Box sx={boxStyles}>
               <CreateDevotional />
