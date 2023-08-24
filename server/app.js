@@ -103,7 +103,7 @@ app.post("/api/new", auth, async (req, res) => {
   const { userId } = req.body;
   console.log(userId);
 
-  const doc = await Docs.create({ creator: userId });
+  const doc = await Docs.create({ creator: userId, access: [userId] });
 
   await User.findByIdAndUpdate(
     userId, // User's ID
@@ -158,6 +158,23 @@ app.post("/api/addAccess", auth, async (req, res) => {
   });
 
   res.status(200).send("Everything Updated Successfully");
+});
+
+app.post("/api/checkAccess", auth, async (req, res) => {
+  const { id, userId } = req.body;
+
+  const doc = await Docs.findById(id).populate();
+  if (!doc) {
+    res.send(400).send("Doc not found");
+  }
+
+  const userFinal = doc.access.filter((user) => user._id == userId);
+
+  if (userFinal.length < 1) {
+    res.status(400).send("You Dont Have Access");
+  }
+
+  res.status(200).send("You got Access");
 });
 
 module.exports = app;

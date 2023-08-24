@@ -19,6 +19,7 @@ import LoginPage from "./pages/auth/LoginPage";
 import Register from "./pages/auth/Register";
 import axios from "axios";
 import Modal from "./components/modals/Modal";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   const token = useUser((state) => state?.token);
@@ -61,6 +62,7 @@ function App() {
             path="/documents/:id"
             element={!token ? <Navigate to="/login" /> : <DocsPage />}
           />
+          <Route path="/error" element={<ErrorPage />} />
         </Routes>
         <Modal />
       </BrowserRouter>

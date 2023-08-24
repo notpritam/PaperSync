@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import EditorToolbar, { formats, modules } from "../components/editor/toolbar";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useUser } from "../util/store";
 import DocHeader from "../components/shared/DocHeader";
 import Editor from "../components/editor/Editor";
@@ -12,6 +12,36 @@ function DocsPage({ title }) {
   const [editorToolOpen, setEditorToolOpen] = useState(true);
   const { id } = useParams();
   const token = useUser((state) => state.token);
+  const user = useUser((state) => state.user);
+  const navigate = useNavigate();
+
+  const checkAccess = () => {
+    axios
+      .post(
+        "http://localhost:3001/api/checkAccess",
+        {
+          id: id,
+          userId: user._id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate("/error");
+      });
+  };
+
+  useEffect(() => {
+    checkAccess();
+  }, []);
 
   return (
     <>
