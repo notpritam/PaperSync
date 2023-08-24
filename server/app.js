@@ -138,4 +138,26 @@ app.post("/api/updateTitle", auth, async (req, res) => {
   res.status(200).send({ doc });
 });
 
+app.post("/api/addAccess", auth, async (req, res) => {
+  const { id, email } = req.body;
+
+  const user = await User.find({ email: email });
+  if (!user) {
+    res.send(400).send("User not found");
+  }
+  console.log(user);
+
+  const doc = await Docs.findByIdAndUpdate(
+    id,
+    { $push: { access: user._id } },
+    { new: true }
+  );
+
+  const userUpdate = await User.findByIdAndUpdate(user._id, {
+    $push: { documents: doc._id },
+  });
+
+  res.status(200).send("Everything Updated Successfully");
+});
+
 module.exports = app;

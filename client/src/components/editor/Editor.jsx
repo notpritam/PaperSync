@@ -10,6 +10,7 @@ function Editor({ id }) {
   const quillRef = useRef();
   const [socket, setSocket] = useState();
   const setTitle = useUser((state) => state.setDocTitle);
+  const setdocument = useUser((state) => state.setDocument);
 
   useEffect(() => {
     const s = io("http://localhost:3001");
@@ -31,6 +32,7 @@ function Editor({ id }) {
     socket.once("load-document", (document) => {
       const textData = document.textData;
       setTitle(document.title);
+      setdocument(document);
 
       quillRef?.current.getEditor().enable();
       quillRef?.current.getEditor().setContents(textData);
