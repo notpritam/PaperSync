@@ -44,6 +44,6 @@ We're dedicated to enhancing your PaperSync experience. Upcoming features includ
 
 ## Get in Touch 📬
 
-Have questions, suggestions, or feedback? Reach out to us at support@papersync.com or join our community on [Discord](link_to_discord_server). We'd love to hear from you!
+Have questions, suggestions, or feedback? Reach out to us at notpritamsharma@gmail.com or join our community on [Discord](link_to_discord_server). We'd love to hear from you!
 
 Let's sync up and create together with PaperSync! 🎉📝
