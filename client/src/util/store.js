@@ -8,6 +8,14 @@ const user = (set) => ({
   authenticate: async () => {
     set((state) => {});
   },
+  docTitle: null,
+  setDocTitle: (params) => {
+    set((state) => {
+      return {
+        docTitle: params,
+      };
+    });
+  },
   setToken: (params) => {
     const { token } = params;
 

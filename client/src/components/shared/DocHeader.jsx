@@ -10,8 +10,12 @@ import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import axios from "axios";
 
 function DocHeader({ _id, token, _title }) {
-  const [title, setTitle] = useState(_title);
+  const docTitle = useUser((state) => state.docTitle);
+  const setDocTitle = useUser((state) => state.setDocTitle);
+
+  const [title, setTitle] = useState(docTitle);
   const user = useUser((state) => state.user);
+
   const imageUrl = user.imageUrl;
   var timeoutId = null;
 
@@ -31,7 +35,7 @@ function DocHeader({ _id, token, _title }) {
         "http://localhost:3001/api/updateTitle",
         {
           _id: _id,
-          title: title,
+          title: docTitle,
         },
         {
           headers: {
@@ -59,8 +63,11 @@ function DocHeader({ _id, token, _title }) {
             <input
               className=""
               placeholder="Doc Title Here"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={docTitle}
+              onChange={(e) => {
+                setTitle(e.target.value);
+                setDocTitle(e.target.value);
+              }}
             ></input>
             <div className="flex gap-2">
               <StarBorderOutlinedIcon />

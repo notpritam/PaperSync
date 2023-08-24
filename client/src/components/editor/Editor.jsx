@@ -3,11 +3,13 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { formats, modules } from "./toolbar";
 import { io } from "socket.io-client";
+import useUser from "../../util/store";
 
 function Editor({ id }) {
   const [editorValue, setEditorValue] = useState("");
   const quillRef = useRef();
   const [socket, setSocket] = useState();
+  const setTitle = useUser((state) => state.setDocTitle);
 
   useEffect(() => {
     const s = io("http://localhost:3001");
@@ -28,6 +30,7 @@ function Editor({ id }) {
 
     socket.once("load-document", (document) => {
       const textData = document.textData;
+      setTitle(document.title);
 
       quillRef?.current.getEditor().enable();
       quillRef?.current.getEditor().setContents(textData);

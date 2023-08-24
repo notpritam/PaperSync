@@ -6,15 +6,17 @@ import { useParams } from "react-router-dom";
 import useUser from "../util/store";
 import DocHeader from "../components/shared/DocHeader";
 import Editor from "../components/editor/Editor";
+import axios from "axios";
 
 function DocsPage({ title }) {
   const [editorToolOpen, setEditorToolOpen] = useState(true);
   const { id } = useParams();
+  const token = useUser((state) => state.token);
 
   return (
     <>
       <main className="w-screen h-screen overflow-hidden">
-        <DocHeader _id={id} token={token} _title={title} />
+        <DocHeader _id={id} token={token} />
         <EditorToolbar editorToolOpen={editorToolOpen} />
         <div className="w-full h-full">
           <div className="m-auto flex items-center justify-center h-full border-[1px]  p-2 mt-2">
