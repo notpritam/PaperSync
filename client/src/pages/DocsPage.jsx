@@ -9,11 +9,7 @@ import Editor from "../components/editor/Editor";
 
 function DocsPage({ title }) {
   const [editorToolOpen, setEditorToolOpen] = useState(true);
-
   const { id } = useParams();
-  const user = useUser((state) => state.user);
-  const imageUrl = user.imageUrl;
-  const token = useUser((state) => state.token);
 
   return (
     <>
