@@ -20,7 +20,7 @@ app.post("/api/register", async (req, res) => {
   // Our register logic starts here
   try {
     // Get user input
-    const { name, email, password } = req.body;
+    const { name, email, password, imageUrl } = req.body;
 
     if (!(email && password && name)) {
       res.status(400).send("All input is required");
@@ -38,6 +38,7 @@ app.post("/api/register", async (req, res) => {
       name: name,
       email: email.toLowerCase(), // sanitize: convert email to lowercase
       password: encryptedPassword,
+      imageUrl: imageUrl,
     });
 
     const token = jwt.sign(

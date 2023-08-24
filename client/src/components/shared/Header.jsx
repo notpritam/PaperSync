@@ -5,6 +5,8 @@ import AppsRoundedIcon from "@mui/icons-material/AppsRounded";
 import useUser from "../../util/store";
 
 function Header() {
+  const user = useUser((state) => state.user);
+  const imageUrl = user.imageUrl;
   const logOut = useUser((state) => state.logOut);
 
   const logoutUser = () => {
@@ -42,7 +44,7 @@ function Header() {
             onClick={logoutUser}
             className="h-[32px] w-[32px] rounded-full overflow-hidden hover:border-[4px] border-blue-400 transition-all duration-200 ease-in bg-red-600"
           >
-            <img src="https://lh3.googleusercontent.com/ogw/AGvuzYZkyx6XMc-0HQ-D27nOrtcvLPws9VF6MyfXxj3-zA=s32-c-mo"></img>
+            <img src={imageUrl}></img>
           </div>
         </div>
       </div>

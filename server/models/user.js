@@ -14,6 +14,9 @@ const userSchema = new mongoose.Schema({
       ref: "Docs",
     },
   ],
+  imageUrl: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
