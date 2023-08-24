@@ -18,6 +18,7 @@ import { useUser } from "./util/store";
 import LoginPage from "./pages/auth/LoginPage";
 import Register from "./pages/auth/Register";
 import axios from "axios";
+import Modal from "./components/modals/Modal";
 
 function App() {
   const token = useUser((state) => state?.token);
@@ -61,6 +62,7 @@ function App() {
             element={!token ? <Navigate to="/login" /> : <DocsPage />}
           />
         </Routes>
+        <Modal />
       </BrowserRouter>
     </>
   );

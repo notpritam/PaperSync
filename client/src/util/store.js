@@ -16,6 +16,14 @@ const user = (set) => ({
       };
     });
   },
+  document: null,
+  setDocument: (params) => {
+    set((state) => {
+      return {
+        document: params,
+      };
+    });
+  },
   setToken: (params) => {
     const { token } = params;
 

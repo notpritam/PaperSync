@@ -2,7 +2,7 @@ import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AppsRoundedIcon from "@mui/icons-material/AppsRounded";
-import { useUser } from "../../util/store";
+import { useModal, useUser } from "../../util/store";
 
 function Header() {
   const user = useUser((state) => state.user);
@@ -12,11 +12,20 @@ function Header() {
   const logoutUser = () => {
     logOut();
   };
+
+  const setModal = useModal((state) => state.setModal);
+
+  const openModal = (id) => {
+    setModal(id);
+  };
   return (
     <>
       <div className="bg-white z-[999] p-2 pl-4 pr-4 flex justify-between items-center shadow-md">
         <div className="flex items-center">
-          <button className="h-[48px] w-[48px] rounded-full hover:bg-[#f0f3f5] flex items-center justify-center">
+          <button
+            onClick={() => openModal("test")}
+            className="h-[48px] w-[48px] rounded-full hover:bg-[#f0f3f5] flex items-center justify-center"
+          >
             <MenuIcon />
           </button>
           <div className="h-[44px] w-[40px]">

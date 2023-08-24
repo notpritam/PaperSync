@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useUser } from "../../util/store";
+import { useModal, useUser } from "../../util/store";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import DriveFileMoveOutlinedIcon from "@mui/icons-material/DriveFileMoveOutlined";
 import CloudDoneOutlinedIcon from "@mui/icons-material/CloudDoneOutlined";
@@ -12,6 +12,11 @@ import axios from "axios";
 function DocHeader({ _id, token, _title }) {
   const docTitle = useUser((state) => state.docTitle);
   const setDocTitle = useUser((state) => state.setDocTitle);
+  const setModal = useModal((state) => state.setModal);
+
+  const openModal = (id) => {
+    setModal(id);
+  };
 
   const [title, setTitle] = useState(docTitle);
   const user = useUser((state) => state.user);
@@ -99,7 +104,10 @@ function DocHeader({ _id, token, _title }) {
         </button>
 
         <div className="bg-[#c3e6ff] hover:shadow-md transition-all duration-150 ease-in p-2 pl-4 pr-4  rounded-3xl">
-          <button className="text-[14px] flex gap-2 items-center">
+          <button
+            onClick={() => openModal("access")}
+            className="text-[14px] flex gap-2 items-center"
+          >
             <LockOutlinedIcon />
             Share
           </button>
