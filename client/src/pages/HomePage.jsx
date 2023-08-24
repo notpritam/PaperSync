@@ -8,7 +8,7 @@ import FolderOpenRoundedIcon from "@mui/icons-material/FolderOpenRounded";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import DocumentCard from "../components/shared/DocumentCard";
 import Header from "../components/shared/Header";
-import useUser from "../util/store";
+import { useUser } from "../util/store";
 import axios from "axios";
 
 function HomePage() {

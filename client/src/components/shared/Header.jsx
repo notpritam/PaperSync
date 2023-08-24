@@ -2,7 +2,7 @@ import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AppsRoundedIcon from "@mui/icons-material/AppsRounded";
-import useUser from "../../util/store";
+import { useUser } from "../../util/store";
 
 function Header() {
   const user = useUser((state) => state.user);

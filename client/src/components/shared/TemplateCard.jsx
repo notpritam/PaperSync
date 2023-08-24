@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import useUser from "../../util/store";
+import { useUser } from "../../util/store";
 import { redirect, useNavigate } from "react-router-dom";
 
 function TemplateCard({ id, name, image, type }) {

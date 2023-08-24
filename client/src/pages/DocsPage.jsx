@@ -3,7 +3,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import EditorToolbar, { formats, modules } from "../components/editor/toolbar";
 import { useParams } from "react-router-dom";
-import useUser from "../util/store";
+import { useUser } from "../util/store";
 import DocHeader from "../components/shared/DocHeader";
 import Editor from "../components/editor/Editor";
 import axios from "axios";

@@ -14,7 +14,7 @@ import {
 import Header from "./components/shared/Header";
 import HomePage from "./pages/HomePage";
 import DocsPage from "./pages/DocsPage";
-import useUser from "./util/store";
+import { useUser } from "./util/store";
 import LoginPage from "./pages/auth/LoginPage";
 import Register from "./pages/auth/Register";
 import axios from "axios";

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useUser from "../../util/store";
+import { useUser } from "../../util/store";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import DriveFileMoveOutlinedIcon from "@mui/icons-material/DriveFileMoveOutlined";
 import CloudDoneOutlinedIcon from "@mui/icons-material/CloudDoneOutlined";

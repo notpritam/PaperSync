@@ -47,5 +47,23 @@ const user = (set) => ({
   },
 });
 
-const useUser = create(persist(user, { name: "_auth" }));
-export default useUser;
+const modal = (set) => ({
+  modal: null,
+  setModal: (parmas) => {
+    set((state) => {
+      return {
+        modal: parmas,
+      };
+    });
+  },
+  closeModal: () => {
+    set((state) => {
+      return {
+        modal: null,
+      };
+    });
+  },
+});
+
+export const useUser = create(persist(user, { name: "_auth" }));
+export const useModal = create(modal);
