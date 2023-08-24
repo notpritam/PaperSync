@@ -129,4 +129,13 @@ app.post("/api/getDocs", auth, async (req, res) => {
   res.status(200).send(docs.documents);
 });
 
+app.post("/api/updateTitle", auth, async (req, res) => {
+  const { _id, title } = req.body;
+
+  console.log(_id, title);
+
+  const doc = await Docs.findByIdAndUpdate(_id, { title });
+  res.status(200).send({ doc });
+});
+
 module.exports = app;

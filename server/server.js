@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
 
     socket.emit("load-document", document);
     socket.on("send-changes", (delta) => {
-      console.log(delta);
+      // console.log(delta);
 
       socket.broadcast.to(id).emit("receive-changes", delta);
     });
@@ -41,7 +41,7 @@ io.on("connection", (socket) => {
     socket.on("save-document", async (textData) => {
       const save = await Docs.findByIdAndUpdate(id, { textData });
 
-      console.log(save);
+      // console.log(save);
     });
   });
 });
