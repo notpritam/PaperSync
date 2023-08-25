@@ -171,7 +171,7 @@ app.post("/api/checkAccess", auth, async (req, res) => {
 
   const doc = await Docs.findById(id).populate();
   if (!doc) {
-    return res.send(400).send("Doc not found");
+    return res.status(400).send("Doc not found");
   }
 
   const userFinal = doc.access.filter((user) => user._id == userId);

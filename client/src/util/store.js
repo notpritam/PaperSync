@@ -73,5 +73,24 @@ const modal = (set) => ({
   },
 });
 
+const drawer = (set) => ({
+  drawer: null,
+  setDrawer: (parmas) => {
+    set((state) => {
+      return {
+        drawer: parmas,
+      };
+    });
+  },
+  closeDrawer: () => {
+    set((state) => {
+      return {
+        drawer: null,
+      };
+    });
+  },
+});
+
 export const useUser = create(persist(user, { name: "_auth" }));
 export const useModal = create(modal);
+export const useDrawer = create(drawer);

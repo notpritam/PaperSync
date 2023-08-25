@@ -14,15 +14,18 @@ function DocHeader({ _id, token, _title }) {
   const setDocTitle = useUser((state) => state.setDocTitle);
   const setModal = useModal((state) => state.setModal);
 
+  const document = useUser((state) => state.document);
+  const creator = document.creator;
+
   const openModal = (id) => {
     setModal(id);
   };
 
   const [title, setTitle] = useState(docTitle);
   const user = useUser((state) => state.user);
+  const userId = user._id;
 
   const imageUrl = user.imageUrl;
-  var timeoutId = null;
 
   useEffect(() => {
     const delayedTime = setTimeout(() => {
@@ -103,15 +106,17 @@ function DocHeader({ _id, token, _title }) {
           <VideocamOutlinedIcon />
         </button>
 
-        <div className="bg-[#c3e6ff] hover:shadow-md transition-all duration-150 ease-in p-2 pl-4 pr-4  rounded-3xl">
-          <button
-            onClick={() => openModal("access")}
-            className="text-[14px] flex gap-2 items-center"
-          >
-            <LockOutlinedIcon />
-            Share
-          </button>
-        </div>
+        {creator == userId ? (
+          <div className="bg-[#c3e6ff] hover:shadow-md transition-all duration-150 ease-in p-2 pl-4 pr-4  rounded-3xl">
+            <button
+              onClick={() => openModal("access")}
+              className="text-[14px] flex gap-2 items-center"
+            >
+              <LockOutlinedIcon />
+              Share
+            </button>
+          </div>
+        ) : null}
 
         <div className="bg-red-500 overflow-hidden h-10 w-10 rounded-full hover:shadow-xl transition-all duration-200 ease-in hover:border-[4px] border-[#c3e6ff] flex justify-center items-center">
           <img

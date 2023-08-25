@@ -38,7 +38,7 @@ function HomePage() {
       .then((response) => {
         const data = response.data;
 
-        setDocs(data);
+        setDocs(data.reverse());
       })
       .catch(function (error) {
         console.log(error);
@@ -198,16 +198,18 @@ function HomePage() {
               </div>
 
               <div className="grid grid-cols-5 ">
-                {docs?.map((document, index) => (
-                  <DocumentCard
-                    key={document._id}
-                    id={document._id}
-                    name={document.title}
-                    image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
-                    date={formatDate(document.updatedAt)}
-                    type="owner"
-                  />
-                ))}
+                {docs?.map((document, index) => {
+                  return (
+                    <DocumentCard
+                      key={document._id}
+                      id={document._id}
+                      name={document.title}
+                      image="https://ssl.gstatic.com/docs/templates/thumbnails/1wyFqxsRmKm9q--7j4WRmBMn694YdhV6hmNrfh4rVm2E_400.png"
+                      date={formatDate(document.updatedAt)}
+                      type={document.creator == userId ? "owner" : "shared"}
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>
