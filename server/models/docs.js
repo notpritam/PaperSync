@@ -21,6 +21,17 @@ const docSchema = new mongoose.Schema(
       default: "Blank",
     },
     textData: Object,
+    comments: [
+      {
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+        },
+        comment: {
+          type: String,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );

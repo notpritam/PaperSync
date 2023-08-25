@@ -101,7 +101,7 @@ app.get("/api/", auth, (req, res) => {
 
 app.post("/api/new", auth, async (req, res) => {
   const { userId } = req.body;
-  console.log(userId);
+  console.log(userId, "this is new");
 
   const doc = await Docs.create({ creator: userId, access: [userId] });
 
@@ -140,10 +140,12 @@ app.post("/api/updateTitle", auth, async (req, res) => {
 
 app.post("/api/addAccess", auth, async (req, res) => {
   const { id, email } = req.body;
+  console.log(id, "this is doc id", email, "this is user email");
 
-  const user = await User.find({ email: email });
+  const user = await User.findOne({ email: email }).exec();
+
   if (!user) {
-    res.send(400).send("User not found");
+    res.status(400).send("User not found");
   }
   console.log(user);
 
@@ -153,11 +155,15 @@ app.post("/api/addAccess", auth, async (req, res) => {
     { new: true }
   );
 
-  const userUpdate = await User.findByIdAndUpdate(user._id, {
-    $push: { documents: doc._id },
-  });
+  const userUpdate = await User.findByIdAndUpdate(
+    user._id,
+    {
+      $push: { documents: doc._id },
+    },
+    { new: true }
+  );
 
-  res.status(200).send("Everything Updated Successfully");
+  res.status(200).send({ userUpdate, doc });
 });
 
 app.post("/api/checkAccess", auth, async (req, res) => {

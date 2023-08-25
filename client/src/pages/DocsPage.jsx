@@ -3,7 +3,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import EditorToolbar, { formats, modules } from "../components/editor/toolbar";
 import { useNavigate, useParams } from "react-router-dom";
-import { useUser } from "../util/store";
+import { useModal, useUser } from "../util/store";
 import DocHeader from "../components/shared/DocHeader";
 import Editor from "../components/editor/Editor";
 import axios from "axios";
@@ -14,6 +14,9 @@ function DocsPage({ title }) {
   const token = useUser((state) => state.token);
   const user = useUser((state) => state.user);
   const navigate = useNavigate();
+  const setModal = useModal((state) => state.setModal);
+
+  setModal("loading");
 
   const checkAccess = () => {
     axios
@@ -32,10 +35,12 @@ function DocsPage({ title }) {
       )
       .then((res) => {
         console.log(res);
+        setModal(null);
       })
       .catch((err) => {
         console.log(err);
-        navigate("/error");
+        // navigate("/error");
+        setModal("not-access");
       });
   };
 

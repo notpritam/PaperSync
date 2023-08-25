@@ -3,6 +3,7 @@ import lock from "../../assets/img/googleIcons/lock.svg";
 import AccessCard from "../shared/AccessCard";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Modal = () => {
   const modalCtx = useModal((state) => state.modal);
@@ -11,6 +12,7 @@ const Modal = () => {
   const [email, setEmail] = useState();
   const token = useUser((state) => state.token);
   const document = useUser((state) => state.document);
+  const navigate = useNavigate();
 
   const addAccess = () => {
     axios
@@ -108,8 +110,41 @@ const Modal = () => {
             </div>
           </div>
         );
-      case "confirm-delete-devotional":
-        return <div>Test... 2</div>;
+      case "not-access":
+        return (
+          <div
+            // onClick={() => setModal(null)}
+            className="absolute z-[1000] top-0 backdrop-blur-sm  bg-opacity-20 bg-black transition-all duration-200 ease-in-out bottom-0  h-screen w-screen flex m-auto justify-center items-center"
+          >
+            <div className="min-w-[30vw] w-[30vw] shadow-2xl rounded-lg p-4 flex flex-col gap-4 overflow-hidden border-[1px]  bg-white min-h-[30vh]">
+              <span className="text-2xl">You need permission</span>
+              <span className="">
+                You are not authorized to view this document at the moment,
+                contact the owner to gain permission to this document
+              </span>
+              <button
+                onClick={() => {
+                  navigate("/");
+                  setModal(null);
+                }}
+                className="w-full bg-blue-400 p-2 rounded-lg text-white hover:shadow-xl duration-200 ease-in-out transition-all border-[1px] border"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        );
+      case "loading":
+        return (
+          <div
+            // onClick={() => setModal(null)}
+            className="absolute z-[1000] top-0 backdrop-blur-sm  bg-opacity-20 bg-black transition-all duration-200 ease-in-out bottom-0  h-screen w-screen flex m-auto justify-center items-center"
+          >
+            <div className="min-w-[30vw] w-[30vw] shadow-2xl items-center justify-center   rounded-lg p-4 flex flex-col gap-4 overflow-hidden border-[1px]  bg-white min-h-[30vh]">
+              <span className="text-2xl">Loading...</span>
+            </div>
+          </div>
+        );
       default:
         return null;
     }
