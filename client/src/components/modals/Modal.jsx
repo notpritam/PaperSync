@@ -12,7 +12,9 @@ const Modal = () => {
   const [email, setEmail] = useState();
   const token = useUser((state) => state.token);
   const document = useUser((state) => state.document);
+  const setDocument = useUser((state) => state.setDocument);
   const navigate = useNavigate();
+  const modalData = useModal((state) => state.modalData);
 
   const addAccess = () => {
     axios
@@ -30,7 +32,8 @@ const Modal = () => {
         }
       )
       .then(function (response) {
-        navigate("/login");
+        const document = response.data.doc;
+        setDocument(document);
       })
       .catch(function (error) {
         console.log(error);
@@ -70,13 +73,20 @@ const Modal = () => {
               <div className="flex flex-col gap-2 w-full p-2 items-center justify-center">
                 <input
                   value={email}
+                  type="email"
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full p-2 border-[1px] rounded-lg"
                 ></input>
                 <div className="flex w-full flex-col gap-3">
                   <span>People with Access</span>
                   {document.access.map((people, index) => {
-                    return <AccessCard key={index} people={people} />;
+                    return (
+                      <AccessCard
+                        key={index}
+                        people={people}
+                        docId={document._id}
+                      />
+                    );
                   })}
                 </div>
                 {/* <div className="flex w-full flex-col gap-3">
@@ -127,7 +137,10 @@ const Modal = () => {
               <button
                 onClick={() => {
                   navigate("/");
-                  setModal(null);
+                  setModal({
+                    modal: null,
+                    modalData: null,
+                  });
                 }}
                 className="w-full bg-blue-400 p-2 rounded-lg text-white hover:shadow-xl duration-200 ease-in-out transition-all border-[1px] border"
               >
@@ -147,6 +160,26 @@ const Modal = () => {
             </div>
           </div>
         );
+
+      case "remove-access":
+        return (
+          <div
+            // onClick={() => setModal(null)}
+            className="absolute z-[1000] top-0 backdrop-blur-sm  bg-opacity-20 bg-black transition-all duration-200 ease-in-out bottom-0  h-screen w-screen flex m-auto justify-center items-center"
+          >
+            <div className="min-w-[30vw] w-[30vw] shadow-2xl items-center justify-center   rounded-lg p-4 flex flex-col gap-4 overflow-hidden border-[1px]  bg-white min-h-[30vh]"></div>
+          </div>
+        );
+      case "snack-error":
+        return (
+          <div className="absolute z-[1000] bottom-0  bg-opacity-20 bg-black transition-all duration-200 ease-in-out  flex m-auto justify-center items-center">
+            <div>
+              <img src={lock}></img>
+            </div>
+            <div>Error Reason</div>
+          </div>
+        );
+
       default:
         return null;
     }

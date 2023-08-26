@@ -153,7 +153,7 @@ app.post("/api/addAccess", auth, async (req, res) => {
     id,
     { $push: { access: user._id } },
     { new: true }
-  );
+  ).populate("access");
 
   const userUpdate = await User.findByIdAndUpdate(
     user._id,
@@ -161,7 +161,7 @@ app.post("/api/addAccess", auth, async (req, res) => {
       $push: { documents: doc._id },
     },
     { new: true }
-  );
+  ).populate("documents");
 
   res.status(200).send({ userUpdate, doc });
 });
@@ -181,6 +181,24 @@ app.post("/api/checkAccess", auth, async (req, res) => {
   }
 
   res.status(200).send("You got Access");
+});
+
+app.post("/api/removeAccess", auth, async (req, res) => {
+  const { userId, docId } = req.body;
+
+  const doc = await Docs.findByIdAndUpdate(docId, {
+    $pull: {
+      access: userId,
+    },
+  }).populate("access");
+
+  const user = await User.findByIdAndUpdate(userId, {
+    $pull: { documents: docId },
+  });
+
+  console.log(doc, "this is userId", user, "this is docId");
+
+  res.status(200).send({ msg: "Updated Successfully", doc: doc });
 });
 
 module.exports = app;

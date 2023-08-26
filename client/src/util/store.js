@@ -57,10 +57,13 @@ const user = (set) => ({
 
 const modal = (set) => ({
   modal: null,
+  modalData: null,
   setModal: (parmas) => {
+    const { modal, modalData } = parmas;
     set((state) => {
       return {
-        modal: parmas,
+        modal: modal,
+        modalData: modalData,
       };
     });
   },

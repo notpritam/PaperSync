@@ -16,7 +16,10 @@ function DocsPage({ title }) {
   const navigate = useNavigate();
   const setModal = useModal((state) => state.setModal);
 
-  setModal("loading");
+  setModal({
+    modal: "loading",
+    modalData: null,
+  });
 
   const checkAccess = () => {
     axios
@@ -35,12 +38,18 @@ function DocsPage({ title }) {
       )
       .then((res) => {
         console.log(res);
-        setModal(null);
+        setModal({
+          modal: null,
+          modalData: null,
+        });
       })
       .catch((err) => {
         console.log(err);
         // navigate("/error");
-        setModal("not-access");
+        setModal({
+          modal: "not-access",
+          modalData: null,
+        });
       });
   };
 

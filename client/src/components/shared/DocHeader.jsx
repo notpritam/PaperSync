@@ -18,7 +18,10 @@ function DocHeader({ _id, token, _title }) {
   const creator = document.creator;
 
   const openModal = (id) => {
-    setModal(id);
+    setModal({
+      modal: id,
+      modalData: null,
+    });
   };
 
   const [title, setTitle] = useState(docTitle);
