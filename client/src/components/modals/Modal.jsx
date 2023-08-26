@@ -75,9 +75,11 @@ const Modal = () => {
                 ></input>
                 <div className="flex w-full flex-col gap-3">
                   <span>People with Access</span>
-                  <AccessCard />
+                  {document.access.map((people, index) => {
+                    return <AccessCard key={index} people={people} />;
+                  })}
                 </div>
-                <div className="flex w-full flex-col gap-3">
+                {/* <div className="flex w-full flex-col gap-3">
                   <span>General Access</span>
                   <div className="flex gap-2">
                     <div className="h-[40px] w-[40px] rounded-full overflow-hidden bg-gray-300 flex items-center justify-center border-[1px]">
@@ -93,7 +95,7 @@ const Modal = () => {
                       </span>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="flex justify-between w-full mt-4">
                   <div className="border-[1px] cursor-pointer border-blue-400 p-2 rounded-3xl pl-4 pr-4 bg-white text-black hover:shadow-2xl duration-150 transition-all ease-in-out">

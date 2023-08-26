@@ -47,7 +47,7 @@ io.on("connection", (socket) => {
 });
 
 async function findDocumet(id) {
-  const document = await Docs.findById(id);
+  const document = await Docs.findById(id).populate("access");
 
   if (document) return document;
 
