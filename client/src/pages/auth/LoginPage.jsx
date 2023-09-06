@@ -49,7 +49,7 @@ function LoginPage() {
             className="h-12 w-12"
             src="https://www.gstatic.com/images/branding/product/1x/docs_2020q4_48dp.png"
           ></img>
-          <h1 className=" text-center text-2xl mb-5">Docs</h1>
+          <h1 className=" text-center text-2xl mb-5">PaperSync</h1>
         </div>
         <div className="bg-white shadow-md w-full rounded-lg divide-y divide-gray-200">
           <div className="px-5 py-7">
