@@ -34,6 +34,10 @@ const Modal = () => {
       .then(function (response) {
         const document = response.data.doc;
         setDocument(document);
+        setModal({
+          modal: null,
+          modalData: null,
+        });
       })
       .catch(function (error) {
         console.log(error);
@@ -62,10 +66,15 @@ const Modal = () => {
                     <img src={lock}></img>
                   </button>
                   <button
-                    // onClick={() => openModal("test")}
+                    onClick={() =>
+                      setModal({
+                        modal: null,
+                        modalData: null,
+                      })
+                    }
                     className="h-[32px] w-[32px] rounded-full hover:bg-[#f0f3f5] flex items-center justify-center"
                   >
-                    <img src={lock}></img>
+                    <span>X</span>
                   </button>
                 </div>
               </div>

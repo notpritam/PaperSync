@@ -8,8 +8,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function DocHeader({ _id, token, _title }) {
+  const navigate = useNavigate();
   const docTitle = useUser((state) => state.docTitle);
   const setDocTitle = useUser((state) => state.setDocTitle);
   const setModal = useModal((state) => state.setModal);
@@ -68,7 +70,7 @@ function DocHeader({ _id, token, _title }) {
   return (
     <header className="bg-white top-0 sticky z-[999] flex justify-between w-full  p-2">
       <div className="flex items-center">
-        <div>
+        <div onClick={() => navigate("/")} className="cursor-pointer">
           <img src="https://www.gstatic.com/images/branding/product/1x/docs_2020q4_48dp.png"></img>
         </div>
         <div className="flex flex-col gap-[4px] ">
