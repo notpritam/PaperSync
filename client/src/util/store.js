@@ -6,7 +6,7 @@ const user = (set) => ({
   user: {},
   token: null,
   authenticate: async () => {
-    set((state) => {});
+    set((state) => { });
   },
   docTitle: null,
   setDocTitle: (params) => {
@@ -16,7 +16,7 @@ const user = (set) => ({
       };
     });
   },
-  document: null,
+  document: "",
   setDocument: (params) => {
     set((state) => {
       return {

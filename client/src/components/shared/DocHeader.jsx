@@ -17,7 +17,7 @@ function DocHeader({ _id, token, _title }) {
   const setModal = useModal((state) => state.setModal);
 
   const document = useUser((state) => state.document);
-  const creator = document.creator;
+  const creator = document?.creator || "";
 
   console.log(document);
 
