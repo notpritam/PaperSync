@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useUser } from "../../util/store";
 import { useNavigate } from "react-router-dom";
+import { Bounce, toast } from "react-toastify";
+import { CircleDotDashed } from "lucide-react";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const logIn = useUser((state) => state.logIn);
 
   const checkUser = async () => {
+    setLoading(true);
     axios
       .post(
         "http://localhost:3001/api/login",
@@ -26,6 +30,7 @@ function LoginPage() {
         }
       )
       .then((response) => {
+        setLoading(false);
         console.log(response.data);
 
         const user = response.data;
@@ -37,6 +42,18 @@ function LoginPage() {
         navigate("/");
       })
       .catch(function (error) {
+        setLoading(false);
+        toast.error(error.message, {
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
         console.log(error);
       });
   };
@@ -72,9 +89,14 @@ function LoginPage() {
             <button
               type="button"
               onClick={checkUser}
-              className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md text-center inline-block"
+              disabled={loading}
+              className="transition duration-200  items-center justify-center bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md text-center inline-block"
             >
-              <span className="inline-block mr-2">Login</span>
+              {loading ? (
+                <CircleDotDashed className="transition-all animate-spin" />
+              ) : (
+                <span className="inline-block mr-2">Login </span>
+              )}
             </button>
           </div>
           <div className="p-5">

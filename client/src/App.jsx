@@ -1,17 +1,6 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useEffect } from "react";
 import "./App.css";
-import ReactDOM from "react-dom/client";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useNavigate,
-  redirect,
-  Navigate,
-} from "react-router-dom";
-import Header from "./components/shared/Header";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import DocsPage from "./pages/DocsPage";
 import { useUser } from "./util/store";
@@ -21,6 +10,7 @@ import axios from "axios";
 import Modal from "./components/modals/Modal";
 import ErrorPage from "./pages/ErrorPage";
 import Drawer from "./components/drawers/Drawers";
+import { Bounce, toast } from "react-toastify";
 
 function App() {
   const token = useUser((state) => state?.token);
@@ -35,9 +25,20 @@ function App() {
           "x-access-token": token,
         },
       })
-      .then((response) => {})
+      .then(() => {})
       .catch(function (error) {
         setToken({ token: null });
+        toast.error(error.message, {
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
       });
   };
 
